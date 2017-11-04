@@ -1,16 +1,282 @@
-@inproceedings{lu_accelerating_2014,
-  title = {Accelerating {Spark} with {RDMA} for {Big} {Data} {Processing}: {Early} {Experiences}},
-  isbn = {978-1-4799-5860-3},
-  shorttitle = {Accelerating {Spark} with {RDMA} for {Big} {Data} {Processing}},
-  url = {http://ieeexplore.ieee.org/document/6925713/},
-  doi = {10.1109/HOTI.2014.15},
+@inproceedings{Chiba2016,
+abstract = {Besides being an in-memory oriented computing framework, Spark runs on top of a Java Virtual Machine (JVM), so JVM parameters must be tuned to improve Spark application performance. Misconfigured parameters and set- tings degrade performance. For example, using Java heaps that are too large often causes long garbage collection pause time, which accounts for over 10-20{\%} of application execution time. Moreover, recent modern computing nodes have many cores and support running multiple threads simultaneously with SMT technology. Thus, optimization in full stack is also important. Not only JVM parameters but also OS parameters, Spark configuration, and application code itself based on CPU characteristics need to be optimized to take full advantage of underlying computing resource. In this paper, we use TPC-H benchmark as our optimization case study and gather many perspective logs such as application log, JVM log such as GC and JIT, system utilization, and hardware events from PMU. We investigate the existing problems and then introduce several optimization approaches for accelerating Spark performance. As a result, our optimization achieves 30 - 40{\%} speed up on average, and up to 5x faster than the naive configuration.},
+author = {Chiba, Tatsuhiro and Onodera, Tamiya},
+booktitle = {ISPASS 2016 - International Symposium on Performance Analysis of Systems and Software},
+doi = {10.1109/ISPASS.2016.7482079},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Chiba, Onodera - 2016 - Workload characterization and optimization of TPC-H queries on Apache Spark.pdf:pdf},
+isbn = {9781509019526},
+title = {{Workload characterization and optimization of TPC-H queries on Apache Spark}},
+year = {2016}
+}
+
+@article{Marco2017,
+abstract = {Data analytic applications built upon big data processing frameworks such as Apache Spark are an important class of applications. Many of these applications are not latency-sensitive and thus can run as batch jobs in data centers. By running multiple applications on a computing host, task co-location can significantly improve the server utilization and system throughput. However, effective task co-location is a non-trivial task, as it requires an understanding of the computing resource requirement of the co-running applications, in order to determine what tasks, and how many of them, can be co-located. In this paper, we present a mixture-of-experts approach to model the memory behavior of Spark applications. We achieve this by learning, off-line, a range of specialized memory models on a range of typical applications; we then determine at runtime which of the memory models, or experts, best describes the memory behavior of the target application. We show that by accurately estimating the resource level that is needed, a co-location scheme can effectively determine how many applications can be co-located on the same host to improve the system throughput, by taking into consideration the memory and CPU requirements of co-running application tasks. Our technique is applied to a set of representative data analytic applications built upon the Apache Spark framework. We evaluated our approach for system throughput and average normalized turnaround time on a multi-core cluster. Our approach achieves over 83.9{\%} of the performance delivered using an ideal memory predictor. We obtain, on average, 8.69x improvement on system throughput and a 49{\%} reduction on turnaround time over executing application tasks in isolation, which translates to a 1.28x and 1.68x improvement over a state-of-the-art co-location scheme for system throughput and turnaround time respectively.},
+archivePrefix = {arXiv},
+arxivId = {1710.00610},
+author = {Marco, Vicent Sanz and Taylor, Ben and Porter, Barry and Wang, Zheng},
+eprint = {1710.00610},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Marco et al. - 2017 - Improving Spark Application Throughput Via Memory Aware Task Co-location A Mixture of Experts Approach.pdf:pdf},
+isbn = {9781450347204},
+title = {{Improving Spark Application Throughput Via Memory Aware Task Co-location: A Mixture of Experts Approach}},
+year = {2017}
+}
+
+@inproceedings{Chaimov2016,
+abstract = {Copyright ? 2016 by the Association for Computing Machinery, Inc. (ACM).We report our experiences porting Spark to large production HPC systems. While Spark performance in a data center installation (with local disks) is dominated by the network, our results show that file system metadata access latency can dominate in a HPC installation using Lustre: it determines single node performance up to 4? slower than a typical workstation. We evaluate a combination of software techniques and hardware configurations designed to address this problem. For example, on the software side we develop a file pooling layer able to improve per node performance up to 2.8?. On the hardware side we evaluate a system with a large NVRAM buffer between compute nodes and the backend Lustre file system: this improves scaling at the expense of per-node performance. Overall, our results indicate that scalability is currently limited to O(102) cores in a HPC installation with Lustre and default Spark. After careful configuration combined with our pooling we can scale up to O(104). As our analysis indicates, it is feasible to observe much higher scalability in the near future.},
+author = {Chaimov, Nicholas and Malony, Allen and Canon, Shane and Iancu, Costin and Ibrahim, Khaled Z. and Srinivasan, Jay},
+booktitle = {Proceedings of the 25th ACM International Symposium on High-Performance Parallel and Distributed Computing - HPDC '16},
+doi = {10.1145/2907294.2907310},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Chaimov et al. - 2016 - Scaling Spark on HPC Systems.pdf:pdf},
+isbn = {9781450343145},
+pmid = {202877},
+title = {{Scaling Spark on HPC Systems}},
+year = {2016}
+}
+
+@article{Kim,
+abstract = {Spark is an in-memory analytics platform that targets commodity server environments today. It relies on the Hadoop Distributed File System (HDFS) to persist inter-mediate checkpoint states and final processing results. In Spark, immutable data are used for storing data updates in each iteration, making it inefficient for long running, it-erative workloads. A non-deterministic garbage collector further worsens this problem. Sparkle is a library that op-timizes memory usage in Spark. It exploits large shared memory to achieve better data shuffling and intermediate storage. Sparkle replaces the current TCP/IP-based shuf-fle with a shared memory approach and proposes an off-heap memory store for efficient updates. We performed a series of experiments on scale-out clusters and scale-up machines. The optimized shuffle engine leveraging shared memory provides 1.3x to 6x faster performance relative to Vanilla Spark. The off-heap memory store along with the shared-memory shuffle engine provides more than 20x performance increase on a probabilistic graph process-ing workload that uses a large-scale real-world hyperlink graph. While Sparkle benefits at most from running on large memory machines, it also achieves 1.6x to 5x per-formance improvements over scale out cluster with equiv-alent hardware setting.},
+author = {Kim, Mijung and Li, Jun and Volos, Haris and Marwah, Manish and Ulanov, Alexander and Keeton, Kimberly and Tucek, Joseph and Cherkasova, Lucy and Xu, Le and Fernando, Pradeep},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Kim et al. - Unknown - Sparkle Optimizing Spark for Large Memory Machines and Analytics.pdf:pdf},
+title = {{Sparkle: Optimizing Spark for Large Memory Machines and Analytics}}
+}
+
+@inproceedings{Wang2016,
+author = {Wang, Li and Xu, Tianni and Wang, Jing and Zhang, Weigong and Sui, Xiufeng and Bao, Yungang},
+booktitle = {Proceedings of the Posters and Demos Session of the 17th International Middleware Conference on ZZZ - Middleware Posters and Demos '16},
+doi = {10.1145/3007592.3007593},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Wang et al. - 2016 - Understanding the Behavior of Spark Workloads from Linux Kernel Parameters Perspective.pdf:pdf},
+isbn = {9781450346665},
+title = {{Understanding the Behavior of Spark Workloads from Linux Kernel Parameters Perspective}},
+year = {2016}
+}
+
+@inproceedings{Shvachko2010,
+abstract = {The Hadoop Distributed File System (HDFS) is designed to store very large data sets reliably, and to stream those data sets at high bandwidth to user applications. In a large cluster, thousands of servers both host directly attached storage and execute user application tasks. By distributing storage and computation across many servers, the resource can grow with demand while remaining economical at every size. We describe the architecture of HDFS and report on experience using HDFS to manage 25 petabytes of enterprise data at Yahoo!.},
+author = {Shvachko, Konstantin and Kuang, Hairong and Radia, Sanjay and Chansler, Robert},
+booktitle = {2010 IEEE 26th Symposium on Mass Storage Systems and Technologies, MSST2010},
+doi = {10.1109/MSST.2010.5496972},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Shvachko et al. - 2010 - The Hadoop distributed file system.pdf:pdf},
+isbn = {9781424471539},
+issn = {978-1-4244-7152-2},
+keywords = {Distributed file system,HDFS,Hadoop},
+title = {{The Hadoop distributed file system}},
+year = {2010}
+}
+
+@article{Armbrust,
+abstract = {Spark SQL is a new module in Apache Spark that integrates rela-tional processing with Spark's functional programming API. Built on our experience with Shark, Spark SQL lets Spark program-mers leverage the benefits of relational processing (e.g., declarative queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning). Compared to previous systems, Spark SQL makes two main additions. First, it offers much tighter integration between relational and procedu-ral processing, through a declarative DataFrame API that integrates with procedural Spark code. Second, it includes a highly extensible optimizer, Catalyst, built using features of the Scala programming language, that makes it easy to add composable rules, control code generation, and define extension points. Using Catalyst, we have built a variety of features (e.g., schema inference for JSON, ma-chine learning types, and query federation to external databases) tailored for the complex needs of modern data analysis. We see Spark SQL as an evolution of both SQL-on-Spark and of Spark it-self, offering richer APIs and optimizations while keeping the ben-efits of the Spark programming model.},
+author = {Armbrust, Michael and Xin, Reynold S and Lian, Cheng and Huai, Yin and Liu, Davies and Bradley, Joseph K and Meng, Xiangrui and Kaftan, Tomer and Franklin, Michael J and Ghodsi, Ali and Zaharia, Matei},
+doi = {10.1145/2723372.2742797},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Armbrust et al. - Unknown - Spark SQL Relational Data Processing in Spark.pdf:pdf},
+keywords = {Data Warehouse,Hadoop,Machine Learning,Spark,Systems Keywords Databases},
+title = {{Spark SQL: Relational Data Processing in Spark}}
+}
+
+
+@article{zaharia_spark:_2010,
+  title = {Spark: {Cluster} computing with working sets.},
+  volume = {10},
+  shorttitle = {Spark},
+  url = {http://static.usenix.org/legacy/events/hotcloud10/tech/full_papers/Zaharia.pdf},
+  number = {10-10},
   urldate = {2017-10-13},
-  publisher = {IEEE},
-  author = {Lu, Xiaoyi and Rahman, Md. Wasi Ur and Islam, Nusrat and Shankar, Dipti and Panda, Dhabaleswar K.},
-  month = aug,
-  year = {2014},
-  pages = {9--16},
-  file = {Accelerating spark with RDMA for big data processing, Early experiences.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Accelerating spark with RDMA for big data processing, Early experiences.pdf:application/pdf}
+  journal = {HotCloud},
+  author = {Zaharia, Matei and Chowdhury, Mosharaf and Franklin, Michael J. and Shenker, Scott and Stoica, Ion},
+  year = {2010},
+  pages = {95},
+  file = {Spark, Cluster Computing with Working Sets.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Spark, Cluster Computing with Working Sets.pdf:application/pdf}
+}
+
+@inproceedings{zaharia_resilient_2012,
+  title = {Resilient distributed datasets: {A} fault-tolerant abstraction for in-memory cluster computing},
+  shorttitle = {Resilient distributed datasets},
+  url = {http://dl.acm.org/citation.cfm?id=2228301},
+  urldate = {2017-10-13},
+  booktitle = {Proceedings of the 9th {USENIX} conference on {Networked} {Systems} {Design} and {Implementation}},
+  publisher = {USENIX Association},
+  author = {Zaharia, Matei and Chowdhury, Mosharaf and Das, Tathagata and Dave, Ankur and Ma, Justin and McCauley, Murphy and Franklin, Michael J. and Shenker, Scott and Stoica, Ion},
+  year = {2012},
+  pages = {2--2},
+  file = {Resilient Distributed Datasets, A Fault-Tolerant Abstraction for In-Memory Cluster Computing.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Resilient Distributed Datasets, A Fault-Tolerant Abstraction for In-Memory Cluster Computing.pdf:application/pdf}
+}
+
+@article{Armbrust2015,
+abstract = {Apache Spark is one of the most widely used open source processing engines for big data, with rich language-integrated APIs and a wide range of libraries. Over the past two years, our group has worked to deploy Spark to a wide range of organizations through consulting relationships as well as our hosted service, Databricks. We describe the main challenges and requirements that appeared in taking Spark to a wide set of users, and usability and performance improvements we have made to the engine in response.},
+author = {Armbrust, Michael and Zaharia, Matei and Das, Tathagata and Davidson, Aaron and Ghodsi, Ali and Or, Andrew and Rosen, Josh and Stoica, Ion and Wendell, Patrick and Xin, Reynold},
+doi = {10.14778/2824032.2824080},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Armbrust et al. - 2015 - Scaling spark in the real world.pdf:pdf},
+issn = {21508097},
+journal = {Proceedings of the VLDB Endowment},
+title = {{Scaling spark in the real world}},
+year = {2015}
+}
+
+@inproceedings{Hema2016,
+author = {Hema, N. and Srinivasa, K. G. and Chidambaram, Saravanan and Saraswat, Sandeep and Saraswati, Sujoy and Ramachandra, Ranganath and Huttanagoudar, Jayashree B.},
+booktitle = {Proceedings of the International Conference on Informatics and Analytics - ICIA-16},
+doi = {10.1145/2980258.2982117},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Hema et al. - 2016 - Performance Analysis of Java Virtual Machine for Machine Learning Workloads using Apache Spark.pdf:pdf},
+isbn = {9781450347563},
+title = {{Performance Analysis of Java Virtual Machine for Machine Learning Workloads using Apache Spark}},
+year = {2016}
+}
+
+@inproceedings{Islam2015,
+abstract = {For data-intensive computing, the low throughput of the existing disk-bound storage systems is a major bottleneck. Recent emergence of the in-memory file systems with heterogeneous storage support mitigates this problem to a great extent. Parallel programming frameworks, e.g. Hadoop MapReduce and Spark are increasingly being run on such high-performance file systems. However, no comprehensive study has been done to analyze the impacts of the in-memory file systems on various Big Data applications. This paper characterizes two file systems in literature, Tachyon 17] and Triple-H 13] that support in-memory and heterogeneous storage, and discusses the impacts of these two architectures on the performance and fault tolerance of Hadoop MapReduce and Spark applications. We present a complete methodology for evaluating MapReduce and Spark workloads on top of in-memory file systems and provide insights about the interactions of different system components while running these workloads. We also propose advanced acceleration techniques to adapt Triple-H for iterative applications and study the impact of different parameters on the performance of MapReduce and Spark jobs on HPC systems. Our evaluations show that, although Tachyon is 5x faster than HDFS for primitive operations, Triple-H performs 47{\%} and 2.4x better than Tachyon for MapReduce and Spark workloads, respectively. Triple-H also accelerates K-Means by 15{\%} over HDFS and 9{\%} over Tachyon.},
+author = {Islam, Nusrat Sharmin and Wasi-Ur-Rahman, Md and Lu, Xiaoyi and Shankar, Dipti and Panda, Dhabaleswar K.},
+booktitle = {Proceedings - 2015 IEEE International Conference on Big Data, IEEE Big Data 2015},
+doi = {10.1109/BigData.2015.7363761},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Islam et al. - 2015 - Performance characterization and acceleration of in-memory file systems for Hadoop and Spark applications on HPC c.pdf:pdf},
+isbn = {9781479999255},
+issn = {2332-7790},
+title = {{Performance characterization and acceleration of in-memory file systems for Hadoop and Spark applications on HPC clusters}},
+year = {2015}
+}
+
+@article{Davidson,
+abstract = {Spark [6] is a cluster framework that performs in-memory computing, with the goal of outperforming disk-based en-gines like Hadoop [2]. As with other distributed data pro-cessing platforms, it is common to collect data in a many-to-many fashion, a stage traditionally known as the shuf-fle phase. In Spark, many sources of inefficiency exist in the shuffle phase that, once addressed, potentially promise vast performance improvements. In this paper, we identify the bottlenecks in the execution of the current design, and propose alternatives that solve the observed problems. We evaluate our results in terms of application level through-put.},
+author = {Davidson, Aaron and Or, Andrew},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Davidson, Or - Unknown - Optimizing Shuffle Performance in Spark.pdf:pdf},
+title = {{Optimizing Shuffle Performance in Spark}}
+}
+
+@inproceedings{Lu2013,
+abstract = {Hadoop RPC is the basic communication mechanism in the Hadoop ecosystem. It is used with other Hadoop components like MapReduce, HDFS, and HBase in real world data-centers, e.g. Facebook and Yahoo!. However, the current Hadoop RPC design is built on ...},
+author = {Lu, Xiaoyi and Islam, Nusrat S. and Md., Wasi Ur Rahman and Jose, Jithin and Subramoni, Hari and Wang, Hao and Panda, Dhabaleswar K.},
+booktitle = {Proceedings of the International Conference on Parallel Processing},
+doi = {10.1109/ICPP.2013.78},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Lu et al. - 2013 - High-Performance design of hadoop RPC with RDMA over InfiniBand.pdf:pdf},
+isbn = {9780769551173},
+issn = {01903918},
+title = {{High-Performance design of hadoop RPC with RDMA over InfiniBand}},
+year = {2013}
+}
+
+@article{Morris2017,
+abstract = {Scale-out parallel processing based on MPI is a 25-year-old standard with at least another decade of preceding history of enabling technologies in the High Performance Comput-ing community. Newer frameworks such as MapReduce, Hadoop, and Spark represent industrial scalable comput-ing solutions that have received broad adoption because of their comparative simplicity of use, applicability to relevant problems, and ability to harness scalable, distributed re-sources. While MPI provides performance and portability, it lacks in productivity and fault tolerance. Likewise, Spark is a specific example of a current-generation MapReduce and data-parallel computing infrastructure that addresses those goals but in turn lacks peer communication support to al-low featherweight, highly scalable peer-to-peer data-parallel code sections. The key contribution of this paper is to demonstrate how to introduce the collective and point-to-point peer communica-tion concepts of MPI into a Spark environment. This is done in order to produce performance-portable, peer-oriented and group-oriented communication services while retaining the essential, desirable properties of Spark. Additional concepts of fault tolerance and productivity are considered. This ap-proach is offered in contrast to adding MapReduce frame-work as upper-middleware based on a traditional MPI im-plementation as baseline infrastructure.},
+archivePrefix = {arXiv},
+arxivId = {arXiv:1707.04788v1},
+author = {Morris, Brandon L and Skjellum, Anthony},
+eprint = {arXiv:1707.04788v1},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Morris, Skjellum - 2017 - MPIgnite An MPI-Like Language and Prototype Implementation for Apache Spark.pdf:pdf},
+keywords = {MPI,Scala,Spark,data-parallel,parallel closures,peer-to-peer communication,task-parallel},
+title = {{MPIgnite: An MPI-Like Language and Prototype Implementation for Apache Spark}},
+year = {2017}
+}
+
+@inproceedings{Ulanov2017,
+abstract = {Present day machine learning is computationally intensive and processes large amounts of data. It is implemented in a distributed fashion in order to address these scalability issues. The work is parallelized across a number of computing nodes. It is usually hard to estimate in advance how many nodes to use for a particular workload. We propose a simple framework for estimating the scalability of distributed machine learning algorithms. We measure the scalability by means of the speedup an algorithm achieves with more nodes. We propose time complexity models for gradient descent and graphical model inference. We validate our models with experiments on deep learning training and belief propagation. This framework was used to study the scalability of machine learning algorithms in Apache Spark.},
+archivePrefix = {arXiv},
+arxivId = {1610.06276},
+author = {Ulanov, Alexander and Simanovsky, Andrey and Marwah, Manish},
+booktitle = {Proceedings - International Conference on Data Engineering},
+doi = {10.1109/ICDE.2017.160},
+eprint = {1610.06276},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Ulanov, Simanovsky, Marwah - 2017 - Modeling scalability of distributed machine learning.pdf:pdf},
+isbn = {9781509065431},
+issn = {10844627},
+title = {{Modeling scalability of distributed machine learning}},
+year = {2017}
+}
+
+@article{Meng2016,
+abstract = {Apache Spark is a popular open-source platform for large-scale data processing that is well-suited for iterative machine learning tasks. In this paper we present MLlib, Spark's open-source distributed machine learning library. MLlib provides efficient functionality for a wide range of learning settings and includes several underlying statistical, optimization, and linear algebra primitives. Shipped with Spark, MLlib supports several languages and provides a high-level API that leverages Spark's rich ecosystem to simplify the development of end-to-end machine learning pipelines. MLlib has experienced a rapid growth due to its vibrant open-source community of over 140 contributors, and includes extensive documentation to support further growth and to let users quickly get up to speed.},
+author = {Meng, Xiangrui and Bradley, Joseph and Yavuz, Burak and Sparks, Evan and Venkataraman, Shivaram and Liu, Davies and Freeman, Jeremy and Tsai, DB and Amde, Manish and Owen, Sean and Xin, Doris and Xin, Reynold and Franklin, Michael J and Zadeh, Reza and Zaharia, Matei and Talwalkar, Ameet},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Meng et al. - 2016 - MLlib Machine Learning in Apache Spark.pdf:pdf},
+journal = {Journal of Machine Learning Research},
+keywords = {apache spark,distributed algorithms,scalable machine learning},
+pages = {1--7},
+title = {{MLlib: Machine Learning in Apache Spark}},
+volume = {17},
+year = {2016}
+}
+
+@inproceedings{Lu2016,
+abstract = {The in-memory data processing framework, Apache Spark, has been stealing the limelight for low-latency interactive applications, iterative and batch computations. Our early experience study [17] has shown that Apache Spark can be enhanced to leverage advanced features (e.g., RDMA) on high-performance networks (e.g., InfiniBand and RoCE) to improve the performance of shuffle phase. With the fast evolving of the Apache Spark ecosystem, the Spark architecture has been changing a lot. This motivates us to investigate whether the earlier RDMA design can be adapted and further enhanced for the new Apache Spark architecture. We also aim to improve the performance for various Spark workloads (e.g., Batch, Graph, SQL). In this paper, we present a detailed design for high-performance RDMA-based Apache Spark on high-performance networks. We conduct systematic performance evaluations on three modern clusters (Chameleon, SDSC Comet, and an in-house cluster) with cutting-edge InfiniBand technologies, such as latest IB EDR (100 Gbps) network, recently introduced Single Root I/O Virtualization (SR-IOV) technology for IB, etc. The evaluation results show that compared to the default Spark running with IP over InfiniBand (IPoIB), our proposed design can achieve up to 79{\%} performance improvement for Spark RDD operation benchmarks (e.g., GroupBy, SortBy), up to 38{\%} performance improvement for batch workloads (e.g., Sort and TeraSort in Intel HiBench), up to 46{\%} performance improvement for graph processing workloads (e.g., PageRank), up to 32{\%} performance improvement for SQL queries (e.g., Aggregation, Join) on varied scales (up to 1,536 cores) of bare-metal IB clusters. Performance evaluations on SR-IOV enabled IB clusters also show 37{\%} improvement achieved by our RDMA-based design. Our RDMA-based Spark design is implemented as a pluggable module and it does not change any Spark APIs, which means that it can be combined with other existing enhanced designs for Apache Spark and Hadoop - roposed in the community. To show this, we further evaluate the performance of a combined version of `RDMA-Spark+RDMA-HDFS' and the numbers show that the combination can achieve the best performance with up to 82{\%} improvement for Intel HiBench Sort and TeraSort on SDSC Comet cluster.},
+author = {Lu, Xiaoyi and Shankar, Dipti and Gugnani, Shashank and Panda, Dhabaleswar K.D.K.},
+booktitle = {Proceedings - 2016 IEEE International Conference on Big Data, Big Data 2016},
+doi = {10.1109/BigData.2016.7840611},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Lu et al. - 2016 - High-performance design of apache spark with RDMA and its benefits on various workloads.pdf:pdf},
+isbn = {9781467390040},
+pmid = {172550},
+title = {{High-performance design of apache spark with RDMA and its benefits on various workloads}},
+year = {2016}
+}
+
+@article{Zadeh,
+abstract = {We describe matrix computations available in the cluster programming framework, Apache Spark. Out of the box, Spark provides abstractions and implementations for dis-tributed matrices and optimization routines using these ma-trices. When translating single-node algorithms to run on a distributed cluster, we observe that often a simple idea is enough: separating matrix operations from vector opera-tions and shipping the matrix operations to be ran on the cluster, while keeping vector operations local to the driver. In the case of the Singular Value Decomposition, by taking this idea to an extreme, we are able to exploit the computa-tional power of a cluster, while running code written decades ago for a single core. Another example is our Spark port of the popular TFOCS optimization package, originally built for MATLAB, which allows for solving Linear programs as well as a variety of other convex programs. We conclude with a comprehensive set of benchmarks for hardware accelerated matrix computations from the JVM, which is interesting in its own right, as many cluster programming frameworks use the JVM. The contributions described in this paper are al-ready merged into Apache Spark and available on Spark installations by default, and commercially supported by a slew of companies which provide further services.},
+author = {Zadeh, Reza Bosagh and Meng, Xiangrui and Ulanov, Alexander and Yavuz, Burak and Pu, Li and Venkataraman, Shivaram and Sparks, Evan and Staple, Aaron and Zaharia, Matei},
+doi = {10.1145/2939672.2939675},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Zadeh et al. - Unknown - Matrix Computations and Optimization in Apache Spark.pdf:pdf},
+keywords = {Concur-rent algorithms,Keywords Distributed Linear Algebra,MLlib,Machine Learning,Machine learning algorithms,Matrix Computations,Opti-mization,Solvers,Spark},
+title = {{Matrix Computations and Optimization in Apache Spark}},
+url = {http://dx.doi.org/10.1145/2939672.2939675}
+}
+
+@article{Zahariab,
+abstract = {Many " big data " applications must act on data in real time. Running these applications at ever-larger scales re-quires parallel platforms that automatically handle faults and stragglers. Unfortunately, current distributed stream processing models provide fault recovery in an expen-sive manner, requiring hot replication or long recovery times, and do not handle stragglers. We propose a new processing model, discretized streams (D-Streams), that overcomes these challenges. D-Streams enable a par-allel recovery mechanism that improves efficiency over traditional replication and backup schemes, and tolerates stragglers. We show that they support a rich set of oper-ators while attaining high per-node throughput similar to single-node systems, linear scaling to 100 nodes, sub-second latency, and sub-second fault recovery. Finally, D-Streams can easily be composed with batch and in-teractive query models like MapReduce, enabling rich applications that combine these modes. We implement D-Streams in a system called Spark Streaming.},
+author = {Zaharia, Matei and Das, Tathagata and Li, Haoyuan and Hunter, Timothy and Shenker, Scott and Stoica, Ion},
+doi = {10.1145/2517349.2522737},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Zaharia et al. - Unknown - Discretized Streams Fault-Tolerant Streaming Computation at Scale.pdf:pdf},
+title = {{Discretized Streams: Fault-Tolerant Streaming Computation at Scale}}
+}
+
+@inproceedings{Li2015,
+abstract = {Analytics algorithms on big data sets require tremendous computational capabilities. Spark is a recent development that addresses big data challenges with data and computation distribution and in-memory caching. However, as a CPU only framework, Spark cannot leverage GPUs and a growing set of GPU libraries to achieve better performance and energy efficiency. We present HeteroSpark, a GPU-accelerated heterogeneous architecture integrated with Spark, which combines the massive compute power of GPUs and scalability of CPUs and system memory resources for applications that are both data and compute intensive. We make the following contributions in this work: (1) we integrate the GPU accelerator into current Spark framework to further leverage data parallelism and achieve algorithm acceleration; (2) we provide a plug-n-play design by augmenting Spark platform so that current Spark applications can choose to enable/disable GPU acceleration; (3) application acceleration is transparent to developers, therefore existing Spark applications can be easily ported to this heterogeneous platform without code modifications. The evaluation of HeteroSpark demonstrates up to 18{\&}{\#}x00D7; speedup on a number of machine learning applications.},
+author = {Li, Peilong and Luo, Yan and Zhang, Ning and Cao, Yu},
+booktitle = {Proceedings of the 2015 IEEE International Conference on Networking, Architecture and Storage, NAS 2015},
+doi = {10.1109/NAS.2015.7255222},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Li et al. - 2015 - HeteroSpark A heterogeneous CPUGPU Spark platform for machine learning algorithms.pdf:pdf},
+isbn = {9781467378918},
+keywords = {Acceleration,Big data,Computer architecture,Graphics processing units,Libraries,Machine learning algorithms,Sparks},
+title = {{HeteroSpark: A heterogeneous CPU/GPU Spark platform for machine learning algorithms}},
+year = {2015}
+}
+
+@article{Gonzalez,
+abstract = {In pursuit of graph processing performance, the systems community has largely abandoned general-purpose dis-tributed dataflow frameworks in favor of specialized graph processing systems that provide tailored programming ab-stractions and accelerate the execution of iterative graph algorithms. In this paper we argue that many of the advan-tages of specialized graph processing systems can be re-covered in a modern general-purpose distributed dataflow system. We introduce GraphX, an embedded graph pro-cessing framework built on top of Apache Spark, a widely used distributed dataflow system. GraphX presents a fa-miliar composable graph abstraction that is sufficient to express existing graph APIs, yet can be implemented us-ing only a few basic dataflow operators (e.g., join, map, group-by). To achieve performance parity with special-ized graph systems, GraphX recasts graph-specific op-timizations as distributed join optimizations and mate-rialized view maintenance. By leveraging advances in distributed dataflow frameworks, GraphX brings low-cost fault tolerance to graph processing. We evaluate GraphX on real workloads and demonstrate that GraphX achieves an order of magnitude performance gain over the base dataflow framework and matches the performance of spe-cialized graph processing systems while enabling a wider range of computation.},
+author = {Gonzalez, Joseph E and Xin, Reynold S and Dave, Ankur and Crankshaw, Daniel and Franklin, Michael J and Stoica, Ion},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Gonzalez et al. - Unknown - This paper is included in the Proceedings of the 11th USENIX Symposium on Operating Systems Design and Imple.pdf:pdf},
+title = {{This paper is included in the Proceedings of the 11th USENIX Symposium on Operating Systems Design and Implementation. GraphX: Graph Processing in a Distributed Dataflow Framework GraphX: Graph Processing in a Distributed Dataflow Framework}},
+url = {https://www.usenix.org/conference/osdi14/technical-sessions/presentation/gonzalez}
+}
+
+@inproceedings{Luckow2016,
+abstract = {High performance distributed computing environments have traditionally been designed to meet the compute demands of scientific applications, supercomputers have historically been producers and not consumers of data. The Apache Hadoop ecosystem has evolved to address many of the traditional limitations of HPC platforms. There exist a whole class of scientific applications that need the collective capabilities of traditional high-performance computing environments and the Apache Hadoop ecosystem. For example, the scientific domains of bio-molecular dynamics, genomics and high-energy physics need to couple traditional computing with Hadoop/Spark based analysis. We investigate the critical question of how to present both capabilities to such scientific applications. Whereas this questions needs answers at multiple levels, we focus on the design of middleware that might support the needs of both. We propose extensions to the Pilot-Abstraction so as to provide a unifying resource management layer. This provides an important step towards integration and thereby interoperable use of HPC and Hadoop/Spark, and allows applications to efficiently couple HPC stages (e.g. simulations) to data analytics. Many supercomputing centers have started to officially support Hadoop environments either in a dedicated environment or in hybrid deployments using tools, such as myHadoop. However, this typically involves many intrinsic, environment-specific details that need to be mastered, and often swamp conceptual questions like: How best to couple HPC and Hadoop application stages? How to explore runtime trade-offs (data localities vs. data movement)? This paper provides both conceptual understanding and practical solutions to questions central to the integrated use of HPC and Hadoop environments. Our experiments are performed on state-of-the-art production HPC environments and provide middleware for multiple domain sciences.},
+archivePrefix = {arXiv},
+arxivId = {1602.00345},
+author = {Luckow, Andre and Paraskevakos, Ioannis and Chantzialexiou, George and Jha, Shantenu},
+booktitle = {Proceedings - 2016 IEEE 30th International Parallel and Distributed Processing Symposium, IPDPS 2016},
+doi = {10.1109/IPDPSW.2016.166},
+eprint = {1602.00345},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Luckow et al. - 2016 - Hadoop on HPC Integrating hadoop and pilot-based dynamic resource management.pdf:pdf},
+isbn = {9781509021406},
+keywords = {Big Data,HPC,Hadoop},
+title = {{Hadoop on HPC: Integrating hadoop and pilot-based dynamic resource management}},
+year = {2016}
+}
+
+@inproceedings{Lu2014,
+abstract = {Apache Hadoop Map Reduce has been highly successful in processing large-scale, data-intensive batch applications on commodity clusters. However, for low-latency interactive applications and iterative computations, Apache Spark, an emerging in-memory processing framework, has been stealing the limelight. Recent studies have shown that current generation Big Data frameworks (like Hadoop) cannot efficiently leverage advanced features (e.g. RDMA) on modern clusters with high-performance networks. One of the major bottlenecks is that these middleware are traditionally written with sockets and do not deliver the best performance on modern HPC systems with RDMA-enabled high-performance interconnects. In this paper, we first assess the opportunities of bringing the benefits of RDMA into the Spark framework. We further propose a high-performance RDMA-based design for accelerating data shuffle in the Spark framework on high-performance networks. Performance evaluations show that our proposed design can achieve 79-83{\%} performance improvement for Group By, compared with the default Spark running with IP over Infini Band (IPoIB) FDR on a 128-256 core cluster. We adopt a plug-in-based approach that can make our design to be easily integrated with newer Spark releases. To the best our knowledge, this is the first design for accelerating Spark with RDMA for Big Data processing. {\textcopyright} 2014 IEEE.},
+author = {Lu, Xiaoyi and Rahman, Md Wasi Ur and Islam, Nusrat and Shankar, Dipti and Panda, Dhabaleswar K.},
+booktitle = {Proceedings - 2014 IEEE 22nd Annual Symposium on High-Performance Interconnects, HOTI 2014},
+doi = {10.1109/HOTI.2014.15},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Lu et al. - 2014 - Accelerating spark with RDMA for big data processing Early experiences.pdf:pdf},
+isbn = {9781479958603},
+issn = {1550-4794},
+keywords = {Apache Spark,InfiniBand,RDMA},
+title = {{Accelerating spark with RDMA for big data processing: Early experiences}},
+year = {2014}
+}
+
+@inproceedings{Islam2016,
+author = {Islam, Nusrat Sharmin and Wasi-Ur-Rahman, Md and Lu, Xiaoyi and Panda, Dhabaleswar K.D.K.},
+booktitle = {Proceedings - 2016 IEEE International Conference on Big Data, Big Data 2016},
+doi = {10.1109/BigData.2016.7840608},
+file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Islam et al. - 2016 - Efficient data access strategies for Hadoop and Spark on HPC cluster with heterogeneous storage.pdf:pdf},
+isbn = {9781467390040},
+title = {{Efficient data access strategies for Hadoop and Spark on HPC cluster with heterogeneous storage}},
+year = {2016}
 }
 
 @article{zaharia_apache_2016,
@@ -29,172 +295,4 @@
   year = {2016},
   pages = {56--65},
   file = {Apache Spark, A unified engine for big data processing.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Apache Spark, A unified engine for big data processing.pdf:application/pdf}
-}
-
-@inproceedings{luckow_hadoop_2016,
-  title = {Hadoop on {HPC}: integrating {Hadoop} and pilot-based dynamic resource management},
-  shorttitle = {Hadoop on {HPC}},
-  url = {http://ieeexplore.ieee.org/abstract/document/7530058/},
-  urldate = {2017-10-13},
-  booktitle = {Parallel and {Distributed} {Processing} {Symposium} {Workshops}, 2016 {IEEE} {International}},
-  publisher = {IEEE},
-  author = {Luckow, Andre and Paraskevakos, Ioannis and Chantzialexiou, George and Jha, Shantenu},
-  year = {2016},
-  pages = {1607--1616},
-  file = {Hadoop on HPC, Integrating Hadoop and Pilot-based Dynamic Resource Management.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Hadoop on HPC, Integrating Hadoop and Pilot-based Dynamic Resource Management.pdf:application/pdf}
-}
-
-@inproceedings{peilong_li_heterospark:_2015,
-  title = {{HeteroSpark}: {A} heterogeneous {CPU}/{GPU} {Spark} platform for machine learning algorithms},
-  isbn = {978-1-4673-7891-8},
-  shorttitle = {{HeteroSpark}},
-  url = {http://ieeexplore.ieee.org/document/7255222/},
-  doi = {10.1109/NAS.2015.7255222},
-  urldate = {2017-10-13},
-  publisher = {IEEE},
-  author = {{Peilong Li} and {Yan Luo} and {Ning Zhang} and {Yu Cao}},
-  month = aug,
-  year = {2015},
-  pages = {347--348},
-  file = {HeteroSpark, A Heterogeneous CPU-GPU Spark Platform for Machine Learning Algorithms.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/HeteroSpark, A Heterogeneous CPU-GPU Spark Platform for Machine Learning Algorithms.pdf:application/pdf}
-}
-
-@inproceedings{lu_high-performance_2013,
-  title = {High-{Performance} {Design} of {Hadoop} {RPC} with {RDMA} over {InfiniBand}},
-  isbn = {978-0-7695-5117-3},
-  url = {http://ieeexplore.ieee.org/document/6687402/},
-  doi = {10.1109/ICPP.2013.78},
-  urldate = {2017-10-13},
-  publisher = {IEEE},
-  author = {Lu, Xiaoyi and Islam, Nusrat S. and Wasi-Ur-Rahman, Md. and Jose, Jithin and Subramoni, Hari and Wang, Hao and Panda, Dhabaleswar K.},
-  month = oct,
-  year = {2013},
-  pages = {641--650},
-  file = {High-Performance Design of Hadoop RPC with RDMA over InfiniBand.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/High-Performance Design of Hadoop RPC with RDMA over InfiniBand.pdf:application/pdf}
-}
-
-@inproceedings{bosagh_zadeh_matrix_2016,
-  title = {Matrix {Computations} and {Optimization} in {Apache} {Spark}},
-  isbn = {978-1-4503-4232-2},
-  url = {http://dl.acm.org/citation.cfm?doid=2939672.2939675},
-  doi = {10.1145/2939672.2939675},
-  language = {en},
-  urldate = {2017-10-13},
-  publisher = {ACM Press},
-  author = {Bosagh Zadeh, Reza and Meng, Xiangrui and Ulanov, Alexander and Yavuz, Burak and Pu, Li and Venkataraman, Shivaram and Sparks, Evan and Staple, Aaron and Zaharia, Matei},
-  year = {2016},
-  pages = {31--38},
-  file = {Matrix Computations and Optimization in Apache Spark.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Matrix Computations and Optimization in Apache Spark.pdf:application/pdf}
-}
-
-@inproceedings{islam_performance_2015,
-  title = {Performance characterization and acceleration of in-memory file systems for {Hadoop} and {Spark} applications on {HPC} clusters},
-  url = {http://ieeexplore.ieee.org/abstract/document/7363761/},
-  urldate = {2017-10-13},
-  booktitle = {Big {Data} ({Big} {Data}), 2015 {IEEE} {International} {Conference} on},
-  publisher = {IEEE},
-  author = {Islam, Nusrat Sharmin and Wasi-ur-Rahman, Md and Lu, Xiaoyi and Shankar, Dipti and Panda, Dhabaleswar K.},
-  year = {2015},
-  pages = {243--252},
-  file = {Performance characterization and acceleration of in-memory file systems for Hadoop and Spark applications on HPC clusters.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Performance characterization and acceleration of in-memory file systems for Hadoop and Spark applications on HPC clusters.pdf:application/pdf}
-}
-
-@article{luckow_pilot-abstraction:_2015,
-  title = {Pilot-{Abstraction}: {A} {Valid} {Abstraction} for {Data}-{Intensive} {Applications} on {HPC}, {Hadoop} and {Cloud} {Infrastructures}?},
-  shorttitle = {Pilot-{Abstraction}},
-  url = {https://arxiv.org/abs/1501.05041},
-  urldate = {2017-10-13},
-  journal = {arXiv preprint arXiv:1501.05041},
-  author = {Luckow, Andre and Mantha, Pradeep and Jha, Shantenu},
-  year = {2015},
-  file = {Pilot-Abstraction, A Valid Abstraction for Data-Intensive Applications on HPC, Hadoop and Cloud Infrastructures.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Pilot-Abstraction, A Valid Abstraction for Data-Intensive Applications on HPC, Hadoop and Cloud Infrastructures.pdf:application/pdf}
-}
-
-@inproceedings{zaharia_resilient_2012,
-  title = {Resilient distributed datasets: {A} fault-tolerant abstraction for in-memory cluster computing},
-  shorttitle = {Resilient distributed datasets},
-  url = {http://dl.acm.org/citation.cfm?id=2228301},
-  urldate = {2017-10-13},
-  booktitle = {Proceedings of the 9th {USENIX} conference on {Networked} {Systems} {Design} and {Implementation}},
-  publisher = {USENIX Association},
-  author = {Zaharia, Matei and Chowdhury, Mosharaf and Das, Tathagata and Dave, Ankur and Ma, Justin and McCauley, Murphy and Franklin, Michael J. and Shenker, Scott and Stoica, Ion},
-  year = {2012},
-  pages = {2--2},
-  file = {Resilient Distributed Datasets, A Fault-Tolerant Abstraction for In-Memory Cluster Computing.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Resilient Distributed Datasets, A Fault-Tolerant Abstraction for In-Memory Cluster Computing.pdf:application/pdf}
-}
-
-@book{alur_db2_2002,
-  address = {San Jose, Calif},
-  edition = {1st ed},
-  series = {{IBM} redbooks},
-  title = {{DB}2 {UDB}'s high function business intelligence in e-business},
-  isbn = {978-0-7384-2460-6},
-  publisher = {IBM Corp},
-  editor = {Alur, Nagraj},
-  year = {2002},
-  keywords = {Business intelligence, Database management, Electronic commerce, IBM Database 2},
-  file = {Ricardo, Integrating R and Hadoop.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Ricardo, Integrating R and Hadoop.pdf:application/pdf}
-}
-
-@article{zaharia_spark:_2010,
-  title = {Spark: {Cluster} computing with working sets.},
-  volume = {10},
-  shorttitle = {Spark},
-  url = {http://static.usenix.org/legacy/events/hotcloud10/tech/full_papers/Zaharia.pdf},
-  number = {10-10},
-  urldate = {2017-10-13},
-  journal = {HotCloud},
-  author = {Zaharia, Matei and Chowdhury, Mosharaf and Franklin, Michael J. and Shenker, Scott and Stoica, Ion},
-  year = {2010},
-  pages = {95},
-  file = {Spark, Cluster Computing with Working Sets.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Spark, Cluster Computing with Working Sets.pdf:application/pdf}
-}
-
-@inproceedings{armbrust_spark_2015,
-  title = {Spark {SQL}: {Relational} {Data} {Processing} in {Spark}},
-  isbn = {978-1-4503-2758-9},
-  shorttitle = {Spark {SQL}},
-  url = {http://dl.acm.org/citation.cfm?doid=2723372.2742797},
-  doi = {10.1145/2723372.2742797},
-  language = {en},
-  urldate = {2017-10-13},
-  publisher = {ACM Press},
-  author = {Armbrust, Michael and Ghodsi, Ali and Zaharia, Matei and Xin, Reynold S. and Lian, Cheng and Huai, Yin and Liu, Davies and Bradley, Joseph K. and Meng, Xiangrui and Kaftan, Tomer and Franklin, Michael J.},
-  year = {2015},
-  pages = {1383--1394},
-  file = {Spark sql, Relational data processing in spark.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Spark sql, Relational data processing in spark.pdf:application/pdf}
-}
-
-@inproceedings{shvachko_hadoop_2010,
-  title = {The hadoop distributed file system},
-  url = {http://ieeexplore.ieee.org/abstract/document/5496972/},
-  urldate = {2017-10-13},
-  booktitle = {Mass storage systems and technologies ({MSST}), 2010 {IEEE} 26th symposium on},
-  publisher = {IEEE},
-  author = {Shvachko, Konstantin and Kuang, Hairong and Radia, Sanjay and Chansler, Robert},
-  year = {2010},
-  pages = {1--10},
-  file = {The hadoop distributed file system.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/The hadoop distributed file system.pdf:application/pdf}
-}
-
-@inproceedings{wang_understanding_2016,
-  title = {Understanding the {Behavior} of {Spark} {Workloads} from {Linux} {Kernel} {Parameters} {Perspective}},
-  isbn = {978-1-4503-4666-5},
-  url = {http://dl.acm.org/citation.cfm?doid=3007592.3007593},
-  doi = {10.1145/3007592.3007593},
-  language = {en},
-  urldate = {2017-10-13},
-  publisher = {ACM Press},
-  author = {Wang, Li and Xu, Tianni and Wang, Jing and Zhang, Weigong and Sui, Xiufeng and Bao, Yungang},
-  year = {2016},
-  pages = {1--2},
-  file = {Understanding the Behavior of Spark Workloads from Linux Kernel Parameters Perspective.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Understanding the Behavior of Spark Workloads from Linux Kernel Parameters Perspective.pdf:application/pdf}
-}
-
-@article{davidson_optimizing_2013,
-  title = {Optimizing shuffle performance in spark},
-  journal = {University of California, Berkeley-Department of Electrical Engineering and Computer Sciences, Tech. Rep},
-  author = {Davidson, Aaron and Or, Andrew},
-  year = {2013},
-  file = {Optimizing Shuffle Performance in Spark.pdf:/home/mbc/Dropbox/Mario/Escuela/MCC/Sistemas_Operativos_Avanzados/survey/papers/Optimizing Shuffle Performance in Spark.pdf:application/pdf}
 }

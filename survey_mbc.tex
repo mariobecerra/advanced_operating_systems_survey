@@ -44,7 +44,10 @@ By default, RDDs are recomputed every time an action is performed, but users hav
 
 \section{Survey}
 
-Cool survey.
+Even though Spark is a powerful computing framework, it is not perfect and has its caveats. There's been a handful of efforts to improve different areas of opportunity. Some are general improvements, whilst other are particularities that are suited for some tasks.
+
+One early work was to adapt RDMA (Remote Direct Memory Access) to Spark in an InfiniBand Architecture \cite{Lu2014}. The InfiniBand Architecture is ``a new industry-standard architecture for server I/O and inter-server communication'' \cite{pfister2001introduction}. The authors claim that Spark can't fully use InfiniBand's capabilities to obtain optimal performance, so they adapt RDMA to be a part of the communication infrastructure by overriding Spark's native features so RDMA calls would be used instead of the Java Socket interface. Their adaptation achieved an 83\% performance improvement in the test tasks that they used and conclude that with their RDMA-base design Spark applications could be improved.
+
 
 \section{Conclusion and future work}
 

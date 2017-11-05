@@ -63,13 +63,13 @@ title = {{The Hadoop distributed file system}},
 year = {2010}
 }
 
-@article{Armbrust,
-abstract = {Spark SQL is a new module in Apache Spark that integrates rela-tional processing with Spark's functional programming API. Built on our experience with Shark, Spark SQL lets Spark program-mers leverage the benefits of relational processing (e.g., declarative queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning). Compared to previous systems, Spark SQL makes two main additions. First, it offers much tighter integration between relational and procedu-ral processing, through a declarative DataFrame API that integrates with procedural Spark code. Second, it includes a highly extensible optimizer, Catalyst, built using features of the Scala programming language, that makes it easy to add composable rules, control code generation, and define extension points. Using Catalyst, we have built a variety of features (e.g., schema inference for JSON, ma-chine learning types, and query federation to external databases) tailored for the complex needs of modern data analysis. We see Spark SQL as an evolution of both SQL-on-Spark and of Spark it-self, offering richer APIs and optimizations while keeping the ben-efits of the Spark programming model.},
-author = {Armbrust, Michael and Xin, Reynold S and Lian, Cheng and Huai, Yin and Liu, Davies and Bradley, Joseph K and Meng, Xiangrui and Kaftan, Tomer and Franklin, Michael J and Ghodsi, Ali and Zaharia, Matei},
-doi = {10.1145/2723372.2742797},
-file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Armbrust et al. - Unknown - Spark SQL Relational Data Processing in Spark.pdf:pdf},
-keywords = {Data Warehouse,Hadoop,Machine Learning,Spark,Systems Keywords Databases},
-title = {{Spark SQL: Relational Data Processing in Spark}}
+@inproceedings{armbrust2015spark,
+  title={Spark sql: Relational data processing in spark},
+  author={Armbrust, Michael and Xin, Reynold S and Lian, Cheng and Huai, Yin and Liu, Davies and Bradley, Joseph K and Meng, Xiangrui and Kaftan, Tomer and Franklin, Michael J and Ghodsi, Ali and others},
+  booktitle={Proceedings of the 2015 ACM SIGMOD International Conference on Management of Data},
+  pages={1383--1394},
+  year={2015},
+  organization={ACM}
 }
 
 
@@ -133,11 +133,11 @@ title = {{Performance characterization and acceleration of in-memory file system
 year = {2015}
 }
 
-@article{Davidson,
-abstract = {Spark [6] is a cluster framework that performs in-memory computing, with the goal of outperforming disk-based en-gines like Hadoop [2]. As with other distributed data pro-cessing platforms, it is common to collect data in a many-to-many fashion, a stage traditionally known as the shuf-fle phase. In Spark, many sources of inefficiency exist in the shuffle phase that, once addressed, potentially promise vast performance improvements. In this paper, we identify the bottlenecks in the execution of the current design, and propose alternatives that solve the observed problems. We evaluate our results in terms of application level through-put.},
-author = {Davidson, Aaron and Or, Andrew},
-file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Davidson, Or - Unknown - Optimizing Shuffle Performance in Spark.pdf:pdf},
-title = {{Optimizing Shuffle Performance in Spark}}
+@article{davidson2013optimizing,
+  title={Optimizing shuffle performance in spark},
+  author={Davidson, Aaron and Or, Andrew},
+  journal={University of California, Berkeley-Department of Electrical Engineering and Computer Sciences, Tech. Rep},
+  year={2013}
 }
 
 @inproceedings{Lu2013,
@@ -213,12 +213,13 @@ title = {{Matrix Computations and Optimization in Apache Spark}},
 url = {http://dx.doi.org/10.1145/2939672.2939675}
 }
 
-@article{Zahariab,
-abstract = {Many " big data " applications must act on data in real time. Running these applications at ever-larger scales re-quires parallel platforms that automatically handle faults and stragglers. Unfortunately, current distributed stream processing models provide fault recovery in an expen-sive manner, requiring hot replication or long recovery times, and do not handle stragglers. We propose a new processing model, discretized streams (D-Streams), that overcomes these challenges. D-Streams enable a par-allel recovery mechanism that improves efficiency over traditional replication and backup schemes, and tolerates stragglers. We show that they support a rich set of oper-ators while attaining high per-node throughput similar to single-node systems, linear scaling to 100 nodes, sub-second latency, and sub-second fault recovery. Finally, D-Streams can easily be composed with batch and in-teractive query models like MapReduce, enabling rich applications that combine these modes. We implement D-Streams in a system called Spark Streaming.},
-author = {Zaharia, Matei and Das, Tathagata and Li, Haoyuan and Hunter, Timothy and Shenker, Scott and Stoica, Ion},
-doi = {10.1145/2517349.2522737},
-file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Zaharia et al. - Unknown - Discretized Streams Fault-Tolerant Streaming Computation at Scale.pdf:pdf},
-title = {{Discretized Streams: Fault-Tolerant Streaming Computation at Scale}}
+@inproceedings{zaharia2013discretized,
+  title={Discretized streams: Fault-tolerant streaming computation at scale},
+  author={Zaharia, Matei and Das, Tathagata and Li, Haoyuan and Hunter, Timothy and Shenker, Scott and Stoica, Ion},
+  booktitle={Proceedings of the Twenty-Fourth ACM Symposium on Operating Systems Principles},
+  pages={423--438},
+  year={2013},
+  organization={ACM}
 }
 
 @inproceedings{Li2015,
@@ -233,12 +234,13 @@ title = {{HeteroSpark: A heterogeneous CPU/GPU Spark platform for machine learni
 year = {2015}
 }
 
-@article{Gonzalez,
-abstract = {In pursuit of graph processing performance, the systems community has largely abandoned general-purpose dis-tributed dataflow frameworks in favor of specialized graph processing systems that provide tailored programming ab-stractions and accelerate the execution of iterative graph algorithms. In this paper we argue that many of the advan-tages of specialized graph processing systems can be re-covered in a modern general-purpose distributed dataflow system. We introduce GraphX, an embedded graph pro-cessing framework built on top of Apache Spark, a widely used distributed dataflow system. GraphX presents a fa-miliar composable graph abstraction that is sufficient to express existing graph APIs, yet can be implemented us-ing only a few basic dataflow operators (e.g., join, map, group-by). To achieve performance parity with special-ized graph systems, GraphX recasts graph-specific op-timizations as distributed join optimizations and mate-rialized view maintenance. By leveraging advances in distributed dataflow frameworks, GraphX brings low-cost fault tolerance to graph processing. We evaluate GraphX on real workloads and demonstrate that GraphX achieves an order of magnitude performance gain over the base dataflow framework and matches the performance of spe-cialized graph processing systems while enabling a wider range of computation.},
-author = {Gonzalez, Joseph E and Xin, Reynold S and Dave, Ankur and Crankshaw, Daniel and Franklin, Michael J and Stoica, Ion},
-file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Gonzalez et al. - Unknown - This paper is included in the Proceedings of the 11th USENIX Symposium on Operating Systems Design and Imple.pdf:pdf},
-title = {{This paper is included in the Proceedings of the 11th USENIX Symposium on Operating Systems Design and Implementation. GraphX: Graph Processing in a Distributed Dataflow Framework GraphX: Graph Processing in a Distributed Dataflow Framework}},
-url = {https://www.usenix.org/conference/osdi14/technical-sessions/presentation/gonzalez}
+@inproceedings{gonzalez2014graphx,
+  title={GraphX: Graph Processing in a Distributed Dataflow Framework.},
+  author={Gonzalez, Joseph E and Xin, Reynold S and Dave, Ankur and Crankshaw, Daniel and Franklin, Michael J and Stoica, Ion},
+  booktitle={OSDI},
+  volume={14},
+  pages={599--613},
+  year={2014}
 }
 
 @inproceedings{Luckow2016,

@@ -50,7 +50,7 @@ By default, RDDs are recomputed every time an action is performed, but users hav
 
 Even though Spark is a powerful computing framework, it is not perfect and has its caveats. There's been a handful of efforts to improve different areas of opportunity. Some are general improvements, whilst other are particularities that are suited for some tasks.
 
-\subsection{Improving communication between nodes}
+\subsection{Improvement based on communication}
 
 As mentioned before, there's a performance bottleneck in the shuffling phase of wide dependencies. It is common to compress files before sending them in the network to alleviate this, but this is too dependent on the structure of the input data. \citeauthor{davidson2013optimizing} \cite{davidson2013optimizing} propose some alternatives to solve the problems that stress the OS during the shuffle phase. Since the number of shuffle files may be in the order of the millions in a usual Spark work, the number of random writes is quite big. The main proposed solution to this problem is to create larger shuffle files. The results show that the I/O wait time is lower with this modification, but disk throughput is sustained, meaning that much less random I/O is done by creating fewer shuffle files. They suggest as future work to do an in-memory shuffle when it is possible to fit the data in the cluster's collective memory.
 
@@ -62,6 +62,8 @@ One early work was to adapt RDMA (Remote Direct Memory Access) to Spark in an In
 
 This same group continued with this study \cite{Lu2016}: in \citeyear{Lu2016} they tested an advanced RDMA-based design in the changed Apache architecture that came with version 1.2.0 \cite{Armbrust2015}. They particularly check for improvements based on RDMA in the new shuffle architecture based in Netty instead of NIO. They implement an advanced design in three clusters with the most recent InfiniBand technologies and test several workloads on RDD Benchmarks, graph processing and SQL queries on top of Spark scaling up to 1536 cores. The results show that they achieve up to 79\% improvement in RDD performance, 46\% for graph workloads and 32\% for SQL queries. 
 
+Even though Spark is most commonly used in large data centres, it can also be use in an HPC context, with supercomputers, such as Cray supercomputers. \citeauthor{Chaimov2016} study the performance of Spark in two Cray XC systems in a large supercomputing centre \cite{Chaimov2016}. They first test the performance of a single workstation with SSDs with a single node of a Cray XC and found that the Cray node was slower. They attributed this to the latency involved in opening files (in \texttt{fopen}). To calibrate the performance in the Cray they propose using a local file system in a Lustre file or main memory and to use pooling when opening files so that metadata is cached.
+%They argue that in supercomputer settings, disk I/O is optimized for bandwidth and network is optimized for latency, unlike in data centres where disk I/O is primarily optimized for latency and network is optimized for bandwidth.
 
 \subsection{Improvement based on file system, OS and JVM parameters}
 

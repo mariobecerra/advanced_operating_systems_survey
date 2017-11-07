@@ -82,6 +82,8 @@ Some different work was done in \cite{Li2015}, where the main contribution was r
 
 \citeauthor{wang2015performance} \cite{wang2015performance} present a model that predicts execution time, memory consumption and I/O cost. The model first executes the Spark program on a cluster using a sample of the data, thus collecting information about execution time, memory consumption and I/O costs. They find that their predictions are accurate for execution time and memory consumption, but not so for I/O cost. They conclude that this approach can help better allocate resources in a cluster running Spark.
 
+In \citeyear{Ulanov2017}, \citeauthor{Ulanov2017} develop a model to that captures the processing time of a given machine learning algorithm in a parallelized computing cluster \cite{Ulanov2017}. Their study aims at modeling the scalability of an algorithm so that the modeler can have an idea in advance of how much the task will take in a given cluster architecture.
+
 In a similar line of improvement, \citeauthor{Marco2017} \cite{Marco2017} develop a machine learning algorithm that predicts the memory requirement of any Spark application in order to use effective task co-location strategies. The machine learning model is trained for each specific task by taking a subset of the dataset that is going to be used and then fitting a set of linear and non-linear regressions. Their approach was tested with a range of Spark applications that cover different application domains and show an accurate system modeling model. Because of these accurate predictions, the memory resources are better utilized and thus the systems achieves performance improvements by effectively using the runtime task scheduler.
 
 \subsection{Other type of improvements}

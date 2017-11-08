@@ -33,11 +33,11 @@ title = {{Scaling Spark on HPC Systems}},
 year = {2016}
 }
 
-@article{Kim,
-abstract = {Spark is an in-memory analytics platform that targets commodity server environments today. It relies on the Hadoop Distributed File System (HDFS) to persist inter-mediate checkpoint states and final processing results. In Spark, immutable data are used for storing data updates in each iteration, making it inefficient for long running, it-erative workloads. A non-deterministic garbage collector further worsens this problem. Sparkle is a library that op-timizes memory usage in Spark. It exploits large shared memory to achieve better data shuffling and intermediate storage. Sparkle replaces the current TCP/IP-based shuf-fle with a shared memory approach and proposes an off-heap memory store for efficient updates. We performed a series of experiments on scale-out clusters and scale-up machines. The optimized shuffle engine leveraging shared memory provides 1.3x to 6x faster performance relative to Vanilla Spark. The off-heap memory store along with the shared-memory shuffle engine provides more than 20x performance increase on a probabilistic graph process-ing workload that uses a large-scale real-world hyperlink graph. While Sparkle benefits at most from running on large memory machines, it also achieves 1.6x to 5x per-formance improvements over scale out cluster with equiv-alent hardware setting.},
-author = {Kim, Mijung and Li, Jun and Volos, Haris and Marwah, Manish and Ulanov, Alexander and Keeton, Kimberly and Tucek, Joseph and Cherkasova, Lucy and Xu, Le and Fernando, Pradeep},
-file = {:home/mbc/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Kim et al. - Unknown - Sparkle Optimizing Spark for Large Memory Machines and Analytics.pdf:pdf},
-title = {{Sparkle: Optimizing Spark for Large Memory Machines and Analytics}}
+@article{kim2017sparkle,
+  title={Sparkle: Optimizing Spark for Large Memory Machines and Analytics},
+  author={Kim, Mijung and Li, Jun and Volos, Haris and Marwah, Manish and Ulanov, Alexander and Keeton, Kimberly and Tucek, Joseph and Cherkasova, Lucy and Xu, Le and Fernando, Pradeep},
+  journal={arXiv preprint arXiv:1708.05746},
+  year={2017}
 }
 
 @inproceedings{Wang2016,

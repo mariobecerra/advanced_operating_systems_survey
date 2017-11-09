@@ -28,10 +28,17 @@ We got a pretty nice abstract regarding the subject that is being studied and an
 
 \section{Introduction}
 
-Very cool intro.
+In the last years there's been a growing amount of information in industry and research, mainly due to the internet and improvement of computers (not just general use, but also smaller devices such as smartphones), which has given rise to different areas of research that didn't exist before. One of these areas deals with the storing of massive amounts of information, and another one has to do with the processing of this information. MapReduce \cite{dean2008mapreduce} is one of the most famous programming models that deals with large data sets on large clusters of commodity machines. Then Hadoop was introduced along with the Hadoop Distributed File System (HDFS), allowing the analysis of large datasets, all using the MapReduce paradigm \cite{Shvachko2010}.
+
+While the HDFS and its underlying technologies provided good performance for using large datasets, they were inefficient for a specific but quite used type of applications: applications that reuse a working set of data. Reusing of data is very common in machine learning applications where it is expected to minimize an loss function, so most algorithms iteratively optimize parameters using techniques such as gradient descent or other numerical optimization methods. Because of this need to have an efficient framework to do iterative algorithms in the same data, Apache Spark was introduced \cite{zaharia_resilient_2012} \cite{zaharia_spark:_2010}.
+
+In this work, it is intended to give a short review of the optimizations and improvements that have been made on Apache Spark over the years since its introduction. 
+
+The rest of the work is organized as follows: in section \ref{sec:spark_overview} an overview of Apache Spark is given, so that the reader has some context; section \ref{sec:survey} surveys and summarizes different published papers on the subject of the improvement of Spark; and section \ref{sec:conclusion} discusses the conclusions of the work and the direction of future work and improvement in this area.
 
 
 \section{Overview of Apache Spark}
+\label{sec:spark_overview}
 
 Apache Spark \cite{zaharia_spark:_2010} is an open-source cluster computing framework that started in 2009 at the University of California, Berkeley \cite{zaharia_apache_2016}. The project aimed at creating a unified engine for distributed data processing by using a model similar to MapReduce but with data-sharing capabilities. This data-sharing was implemented with an abstraction called Resilient Distributed Datasets (or RDDs) \cite{zaharia_resilient_2012}. The idea was that in traditional MapReduce jobs, iterative jobs as the ones that surge naturally in machine learning, graph algorithms and interactive data mining suffer from a high overhead because of the continuous reading of the same data from disk. This could be improved by leveraging distributed memory. Back in the day, the only way to reuse data between computations was to write in a file system, which also incurred in a lot of overhead. 
 
@@ -45,8 +52,8 @@ By default, RDDs are recomputed every time an action is performed, but users hav
 
 
 
-
 \section{Survey}
+\label{sec:survey}
 
 Even though Spark is a powerful computing framework, it is not perfect and has its caveats. There's been a handful of efforts to improve different areas of opportunity. Some are general improvements, whilst other are particularities that are suited for some tasks.
 
@@ -108,6 +115,7 @@ Another recent effort that has been made is to combine MPI with Spark. \citeauth
 
 
 \section{Conclusion and future work}
+\label{sec:conclusion}
 
 Very nice conclusions.
 

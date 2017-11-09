@@ -1,3 +1,14 @@
+@article{dean2008mapreduce,
+  title={MapReduce: simplified data processing on large clusters},
+  author={Dean, Jeffrey and Ghemawat, Sanjay},
+  journal={Communications of the ACM},
+  volume={51},
+  number={1},
+  pages={107--113},
+  year={2008},
+  publisher={ACM}
+}
+
 @inproceedings{Chiba2016,
 abstract = {Besides being an in-memory oriented computing framework, Spark runs on top of a Java Virtual Machine (JVM), so JVM parameters must be tuned to improve Spark application performance. Misconfigured parameters and set- tings degrade performance. For example, using Java heaps that are too large often causes long garbage collection pause time, which accounts for over 10-20{\%} of application execution time. Moreover, recent modern computing nodes have many cores and support running multiple threads simultaneously with SMT technology. Thus, optimization in full stack is also important. Not only JVM parameters but also OS parameters, Spark configuration, and application code itself based on CPU characteristics need to be optimized to take full advantage of underlying computing resource. In this paper, we use TPC-H benchmark as our optimization case study and gather many perspective logs such as application log, JVM log such as GC and JIT, system utilization, and hardware events from PMU. We investigate the existing problems and then introduce several optimization approaches for accelerating Spark performance. As a result, our optimization achieves 30 - 40{\%} speed up on average, and up to 5x faster than the naive configuration.},
 author = {Chiba, Tatsuhiro and Onodera, Tamiya},

@@ -119,12 +119,12 @@ HPC clusters are increasingly being equipped with fast high-performance storage,
 Another recent effort that has been made is to combine MPI with Spark. \citeauthor{Morris2017} present MPIgnite \cite{Morris2017}, a framework that introduces peer-to-peer communication concepts into Spark. And the most recent work in the area of improving spark for HPC systems was made by \citeauthor{kim2017sparkle}. In their article they introduce Sparkle \cite{kim2017sparkle}, a library that enhances Spark for scale-up servers, such as HPC systems, leveraging the shared memory these systems have. With shared memory, data shuffling is less inefficient because there's no dependence on data transfer between distant nodes. Vanilla Spark makes the JVM garbage collector work on deleting a lot of objects in the heap memory of the worker nodes, but Sparkle takes care of this by efficiently storing data in the global shared memory. In the performance tests, Sparkle in a scale-up system showed an improvement of 1.6 up to 5 times in comparison to Vanilla Spark running on a scale-out cluster with equivalent hardware, this mainly due to the faster communication between the nodes.
 
 
-
-
-\section{Conclusion and future work}
+\section{Conclusions and future work}
 \label{sec:conclusion}
 
-Very nice conclusions.
+Apache Spark is a widely used framework for data analysis, both in industry and in research, and because of this wide use, there's room for improvement. The big data trend is not stopping any time soon, so there is a need to keep filling holes in data processing technologies. The contributors of Apache Spark continue to make improvements, like extending Spark for other languages like R, creating new high level libraries and enhancing performance \cite{zaharia_apache_2016}; but they can't cover all the niche areas in which Spark can be used, so there are a lot of efforts to mix different technologies with Vanilla Spark.
+
+Future work should perhaps be aimed at making more user-friendly, like in high-level libraries, some of the tools presented here, so that less specialized scientists can make use of them without so much burden. Also, in each of the papers presented here, authors recognize the particular areas in which they can improve their contributions, and most of them are aimed at reducing some sort of overhead related to their adaptations. Finally, there are always new developments in computer architecture, so the improvement of Apache Spark is a continuous work that will never be complete because there are always new areas in which it can be polished.
 
 
 \printbibliography

@@ -11,7 +11,7 @@
 
 \newgeometry{bottom=2.5cm, left=2.1cm,right=2.1cm,top=2.5cm}
 
-\title{Survey name (something about improving Apache Spark)}
+\title{On improving Apache Spark's performance}
 
 \author{Mario~Becerra Contreras}
 
@@ -55,11 +55,13 @@ By default, RDDs are recomputed every time an action is performed, but users hav
 \section{Survey}
 \label{sec:survey}
 
-Even though Spark is a powerful computing framework, it is not perfect and has its caveats. There's been a handful of efforts to improve different areas of opportunity. Some are general improvements, whilst other are particularities that are suited for some tasks.
+Even though Spark is a powerful computing framework, it is not perfect and has its caveats. There's been a handful of efforts to improve different areas of opportunity. Some are general improvements, whilst other are particularities that are suited for some tasks. For this work, the improvements are divided in five rather broad and somewhat overlapping areas.
 
 \subsection{Improvement based on communication}
 
-As mentioned before, there's a performance bottleneck in the shuffling phase of wide dependencies. It is common to compress files before sending them in the network to alleviate this, but this is too dependent on the structure of the input data. \citeauthor{davidson2013optimizing} \cite{davidson2013optimizing} propose some alternatives to solve the problems that stress the OS during the shuffle phase. Since the number of shuffle files may be in the order of the millions in a usual Spark work, the number of random writes is quite big. The main proposed solution to this problem is to create larger shuffle files. The results show that the I/O wait time is lower with this modification, but disk throughput is sustained, meaning that much less random I/O is done by creating fewer shuffle files. They suggest as future work to do an in-memory shuffle when it is possible to fit the data in the cluster's collective memory.
+As mentioned before, there's a performance bottleneck in the shuffling phase of wide dependencies. It is common to compress files before sending them in the network to alleviate this, but this is too dependent on the structure of the input data. Another problem with Spark is that it originally didn't fully use the potential of cluster with high-speed connections. There has been work done to explicitly address these issues, and some of the efforts are shown in the following paragraphs.
+
+\citeauthor{davidson2013optimizing} \cite{davidson2013optimizing} propose some alternatives to solve the problems that stress the OS during the shuffle phase. Since the number of shuffle files may be in the order of the millions in a usual Spark work, the number of random writes is quite big. The main proposed solution to this problem is to create larger shuffle files. The results show that the I/O wait time is lower with this modification, but disk throughput is sustained, meaning that much less random I/O is done by creating fewer shuffle files. They suggest as future work to do an in-memory shuffle when it is possible to fit the data in the cluster's collective memory.
 
 This issue was addressed some time later by the Spark group themselves. \citeauthor{Armbrust2015} \cite{Armbrust2015} recognize the problem of shuffling operations on many nodes, along with some other memory and usability issues. The former affair was resolved by changing the original NIO-based network module with a new implementation based on Netty. The latter problems were specifically that memory management needed to be improved, that performance debugging was hard to do, and that there was some confusion about Spark's API.
 
@@ -69,10 +71,11 @@ One early work was to adapt RDMA (Remote Direct Memory Access) to Spark in an In
 
 This same group continued with this study \cite{Lu2016}: in \citeyear{Lu2016} they tested an advanced RDMA-based design in the changed Apache architecture that came with version 1.2.0 \cite{Armbrust2015}. They particularly check for improvements based on RDMA in the new shuffle architecture based in Netty instead of NIO. They implement an advanced design in three clusters with the most recent InfiniBand technologies and test several workloads on RDD Benchmarks, graph processing and SQL queries on top of Spark scaling up to 1536 cores. The results show that they achieve up to 79\% improvement in RDD performance, 46\% for graph workloads and 32\% for SQL queries. 
 
-
 \subsection{Improvement based on file system, OS and JVM parameters}
 
-Another work \cite{Islam2015} focused on studying the impacts of two file systems (Tachyon and Triple-H) on Spark applications. In particular, they identified critical parameters on the performance of the applications that run on top of these file systems, such as BlockSize, concurrent containers and concurrent tasks. They also propose selective caching into high performance memory layers (such as RAMDisks or SSDs). This selective caching refers to caching the data that is the output of an iteration coming from a map or reduce task. One more optimization comes from improving the cache eviction algorithm after each algorithm iteration. They see that CPU-bound workloads don't show as much benefit as I/O intensive ones, and that iterative applications gain performance over the Triple-H file system.
+Spark is built in Scala, so it heavily uses the Java Virtual Machine to run tasks, and it also has to run on top of a file system and an Operating System. Many clusters nowadays come with some Linux-based OS and HDFS is a very common file system to use in these clusters. It is natural to try to that accelerate the execution of Spark tasks by fine-tuning certain parameters that are based on the OS and file system used, or in the configuration of the JVM.
+
+One of the first efforts was done by \citeauthor{Islam2015} who focused on studying the impacts of two file systems (Tachyon and Triple-H) on Spark applications \cite{Islam2015}. In particular, they identified critical parameters on the performance of the applications that run on top of these file systems, such as BlockSize, concurrent containers and concurrent tasks. They also propose selective caching into high performance memory layers (such as RAMDisks or SSDs). This selective caching refers to caching the data that is the output of an iteration coming from a map or reduce task. One more optimization comes from improving the cache eviction algorithm after each algorithm iteration. They see that CPU-bound workloads don't show as much benefit as I/O intensive ones, and that iterative applications gain performance over the Triple-H file system.
 
 \citeauthor{Wang2016} \cite{Wang2016} study the behaviour of Linux virtual memory to find out the effect of kernel parameters. They test this with Spark workloads that are especially sensitive to memory parameter tuning. They test the effect of transparent huge page but find none. They find that enabling Non-uniform memory access (NUMA) yields better results for some workloads, though not all. The conclusion of this work is that better results can be achieved by tuning certain parameters, although this study was small and not so generalizable.
 
@@ -81,9 +84,11 @@ Since Spark runs on top of Java Virtual Machines (JVMs), another way to improve 
 
 Another similar work was done by \citeauthor{Hema2016}, testing the behaviour of Spark under different JVM parameters (heap size and GC frequency), testing it with machine learning case studies, particularly k-means, matrix factorization and logistic regression \cite{Hema2016}. They found that k-means and logistic regression didn't have performance issues in their tests because heap size was sufficient and it didn't need much garbage collection, whilst matrix factorization had a heap memory bottleneck because of the large number of created objects, and consequently GC is called rather frequently. They say that performance can be improved by increasing the executor memory.
 
-\subsection{GPU-based improvement}
+\subsection{Improvement based on GPUs}
 
-Some different work was done in \cite{Li2015}, where the main contribution was related to GPU computing. They propose ``the marriage of GPUs to CPU-based cluster computing framework''. To do so, they implement HeteroSpark, a framework that augments the usual Spark framework by using GPUs in Spark worker nodes. The function calls from Spark are read by HeteroSpark and directed to the GPU via Java's Remote Method Invocation (RMI). If a function call isn't implemented in the GPU, the developer may opt to use the original implementation or decide to implement it themselves. The results show that, not surprisingly, performance is much better with Heterospark. This is because of the GPU acceleration. What the authors remark is that this improvement was achieved without sacrificing neither programmability nor portability.
+Another line of improvement is to make use of the power of Graphics Processing Units (GPUs) along with Spark. GPUs have thousands of cores to process parallel workloads efficiently, which can be especially useful for many machine learning applications, so an intention to unite GPUs with Spark cluster computing was only natural.
+
+The earliest work was done by \citeauthor{Li2015} in \citeyear{Li2015}, who proposed ``the marriage of GPUs to CPU-based cluster computing framework'' \cite{Li2015}. To do so, they implement HeteroSpark, a framework that augments the usual Spark framework by using GPUs in Spark worker nodes. The function calls from Spark are read by HeteroSpark and directed to the GPU via Java's Remote Method Invocation (RMI). If a function call isn't implemented in the GPU, the developer may opt to use the original implementation or decide to implement it themselves. The results show that, not surprisingly, performance is much better with Heterospark. This is because of the GPU acceleration. What the authors remark is that this improvement was achieved without sacrificing neither programmability nor portability.
 
 Another effort was made by \citeauthor{Manzi2016}, who explore the feasibility and potential benefits of combining GPUs and Spark. Since most non-shuffling operations can be completed on GPUs, their implementation focuses on porting these operations to the GPUs \cite{Manzi2016}. Their implementation first has to convert original data to a GPU-compatible format, and their conclusion from the analysis is that ``the performance improvement for any application will depend on how much the gain from GPU thread-level parallelism overshadows the data conversion cost'', e.g., in an implementation for WordCount, the CPU converts from unicode characters to ASCII, and this step takes 57\% of the total time \cite{Manzi2016}. In the K-means algorithm, data shuffling is a minor part of the process, so the gains are much higher; so it is better to use GPUs with algorithms that make many iterations over the same dataset so that the data preparation cost is offset.
 
@@ -94,7 +99,9 @@ Another effort was made by \citeauthor{Manzi2016}, who explore the feasibility a
 Despite these efforts, caching data in GPU memory for iterative processes had not yet been fully explored, until the work of \citeauthor{Hong2017} came along \cite{Hong2017}. They noted that in most of the GPU-accelerated applications came from the system overhead and not from the computations themselves. They present a PySpark based extension for Spark that does efficient GPU in-memory caching and processing. They show that their system improves the performance of different iterative algorithms, such as logistic regression and k-means.
 
 
-\subsection{Performance prediction based improvement}
+\subsection{Improvement based on performance prediction}
+
+Performance prediction refers to approximating a performance metric (such as execution time or memory consumption) based on the input data fed to the Spark workers. Performance can vary depending on different things such as input data size, type of work done, computing capability, computing architecture, etc. Knowing how much resources a given task will take is useful for the allocation of resources and load balancing in computer clusters.
 
 \citeauthor{wang2015performance} \cite{wang2015performance} present a model that predicts execution time, memory consumption and I/O cost. The model first executes the Spark program on a cluster using a sample of the data, thus collecting information about execution time, memory consumption and I/O costs. They find that their predictions are accurate for execution time and memory consumption, but not so for I/O cost. They conclude that this approach can help better allocate resources in a cluster running Spark.
 

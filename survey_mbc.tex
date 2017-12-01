@@ -76,6 +76,8 @@ One early work was to adapt RDMA (Remote Direct Memory Access) to Spark in an In
 
 This same group continued with this study \cite{Lu2016}: in \citeyear{Lu2016} they tested an advanced RDMA-based design in the changed Apache architecture that came with version 1.2.0 \cite{Armbrust2015}. They particularly check for improvements based on RDMA in the new shuffle architecture based on Netty instead of NIO. They implement an advanced design in three clusters with the most recent InfiniBand technologies and test several workloads on RDD Benchmarks, graph processing and SQL queries on top of Spark scaling up to 1536 cores. The results show that they achieve up to 79\% improvement in RDD performance, 46\% for graph workloads and 32\% for SQL queries. 
 
+There are many areas in which communication could and can be improved in Apache Spark. 
+
 \subsection{Improvement based on file system, OS and JVM parameters}
 
 Spark is built in Scala, so it heavily uses the Java Virtual Machine to run tasks, and it also has to run on top of a file system and an operating system. Many clusters nowadays come with some Linux-based OS, and HDFS is a very common file system to use in these clusters. It is natural to try to accelerate the execution of Spark tasks by fine-tuning certain parameters that are based on the OS and file system used, or in the configuration of the JVM.
@@ -129,8 +131,7 @@ Another recent effort that has been made is to combine MPI with Spark. \citeauth
 
 Finally, in \citeyear{Anderson2017}, \citeauthor{Anderson2017} pretend to bridge the gap between Spark and HPC frameworks such as MPI and take the both of both: MPI's performance and Spark's fault tolerance \cite{Anderson2017}. They argue that although Spark has done a very good job in accelerating the performance gotten from using Hadoop alone, it still falls short in performance in comparison with certain HPC environments with native code and optimized communication (e.g., MPI). In their work, they serialize the data from Spark's RDDs and transfer it for MPI processing. They test their framework with four applications and find that they can achieve between 3 and 17 times speedups compared to Spark-based implementations of the same applications. Although they do put an emphasis on the fact that their framework will only make sense for certain operations in which Spark takes longer than some fixed overheads inherent from the data transfer from RDDs to MPI, i.e., operations which have more complex communication.
 
-
-% In general, improvements for HPC systems have been sparse and have lacked generality.
+Although there has been good work in this area, most, if not all, of the improvements mentioned here seem to involve great programming efforts to get the programs running, and each of them have been ad-hoc improvements for certain type of HPC clusters.
 
 
 \section{Conclusions and future work}
@@ -138,9 +139,11 @@ Finally, in \citeyear{Anderson2017}, \citeauthor{Anderson2017} pretend to bridge
 
 Apache Spark is a widely used framework for data analysis, both in industry and in research, and because of this wide use, there is room for improvement. The big data trend is not stopping any time soon, so there is a need to keep filling holes in data processing technologies. The contributors of Apache Spark continue to make improvements, like extending Spark for other languages like R, creating new high level libraries and enhancing performance \cite{zaharia_apache_2016}; but they cannot cover all the niche areas in which Spark can be used, so there are a lot of efforts to mix different technologies with Vanilla Spark.
 
-% Most of the improvements are for particular systems and lack generality.
+Most of the improvements are for particular systems and lack generality; and in general they cannot be so easily integrated with the usual Spark installation. Future work should perhaps be aimed at making more user-friendly, like in high-level libraries, some of the tools presented here, so that less specialized scientists can make use of them without so much burden.
 
-Future work should perhaps be aimed at making more user-friendly, like in high-level libraries, some of the tools presented here, so that less specialized scientists can make use of them without so much burden. Also, in each of the papers presented here, authors recognize the particular areas in which they can improve their contributions, and most of them are aimed at reducing some sort of overhead related to their adaptations. Finally, there are always new developments in computer architecture, so the improvement of Apache Spark is a continuous work that will never be complete because there are always new areas in which it can be polished.
+Also, in each of the papers presented here, authors recognize the particular areas in which they can improve their contributions, and most of them are aimed at reducing some sort of overhead related to their adaptations. This is a quite important subject which, even though is very general, it is paramount that if a potential improvement is implemented, the overhead induced by this shall not reduce the benefit that could be obtained by the implementation. For instance, in \cite{Anderson2017} it is mentioned that their implementation has an overhead of several seconds, so it should be used only when the potential benefit is larger than those seconds that are introduced as overhead.
+
+Finally, there are always new developments in computer architecture, so the improvement of Apache Spark is a continuous work that will never be complete because there are always new areas in which it can be polished. 
 
 
 \printbibliography

@@ -76,7 +76,7 @@ One early work was to adapt RDMA (Remote Direct Memory Access) to Spark in an In
 
 This same group continued with this study \cite{Lu2016}: in \citeyear{Lu2016} they tested an advanced RDMA-based design in the changed Apache architecture that came with version 1.2.0 \cite{Armbrust2015}. They particularly check for improvements based on RDMA in the new shuffle architecture based on Netty instead of NIO. They implement an advanced design in three clusters with the most recent InfiniBand technologies and test several workloads on RDD Benchmarks, graph processing and SQL queries on top of Spark scaling up to 1536 cores. The results show that they achieve up to 79\% improvement in RDD performance, 46\% for graph workloads and 32\% for SQL queries. 
 
-There are many areas in which communication could and can be improved in Apache Spark. 
+Some of the subjects that are left as future work are synchronization across nodes, interference between independent shuffles \cite{nicolae2017leveraging}, optimizing independent shuffles or minimizing interference with other workloads \cite{Nicolae2016}. The Spark group also mentions that they are currently working on memory management outside the JVM and runtime code generation \cite{Armbrust2015}. There also can be more investigation about architectural bottlenecks in Spark and how to improve them \cite{Lu2016}.
 
 \subsection{Improvement based on file system, OS and JVM parameters}
 

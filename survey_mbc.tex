@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage[pass]{geometry}
 \usepackage[backend=bibtex, maxbibnames=99]{biblatex}
+\usepackage{parskip}
 
 
 \addbibresource{bibliography.bib} %Imports bibliography file
@@ -90,6 +91,8 @@ Since Spark runs on top of Java Virtual Machines (JVMs), another way to improve 
 % These guys cite some other papers that do similar work as theirs. Check them out. They also mention some future work on other Spark workloads. See if they continued.
 
 Another similar work was done by \citeauthor{Hema2016}, testing the behaviour of Spark under different JVM parameters (heap size and GC frequency), testing it with machine learning case studies, particularly k-means, matrix factorization and logistic regression \cite{Hema2016}. They found that k-means and logistic regression didn't have performance issues in their tests because heap size was sufficient and it did not need much garbage collection, whilst matrix factorization had a heap memory bottleneck because of the large number of created objects, and consequently GC is called rather frequently. They say that performance can be improved by increasing the executor memory.
+
+The work done on how Spark can be improved by tuning Linux parameters was very specific \cite{Wang2016}, so they can investigate further by doing more tests and finding out why certain parameters change the behaviour of Spark. As for the JVM-based improvements, the direction in which research is heading is about generalizing results by doing tests on more datasets and workloads, as well as integration of JVM, OS and file system \cite{Chiba2016} \cite{Hema2016}.
 
 \subsection{Improvement based on GPUs}
 

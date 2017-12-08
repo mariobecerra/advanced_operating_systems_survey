@@ -13,7 +13,7 @@
 
 \newgeometry{bottom=2.5cm, left=2.1cm,right=2.1cm,top=2.5cm}
 
-\title{On improving Apache Spark's performance}
+\title{On improving Apache Spark's performance: a survey}
 
 \author{Mario~Becerra Contreras}
 
@@ -146,7 +146,7 @@ Although there has been good work in this area, most, if not all, of the improve
 
 Apache Spark is a widely used framework for data analysis, both in industry and in research. It is one of the most contributed open-source projects with many third-party packages and libraries. Because of this wide use, there is room for improvement. The big data trend is not stopping any time soon, so there is a need to keep filling holes in data processing technologies. The contributors of Apache Spark continue to make improvements, like extending Spark for other languages like R, creating new high level libraries and enhancing performance \cite{zaharia_apache_2016}; but they cannot cover all the niche areas in which Spark can be used, so there are a lot of efforts to mix different technologies with Vanilla Spark.
 
-Most of the improvements are for particular systems and lack generality; and in general they cannot be so easily integrated with the usual Spark installation. Future work should perhaps be aimed at making more user-friendly, like in high-level libraries, some of the tools presented here, so that less specialized scientists can make use of them without so much burden.
+Most of the improvements are for particular systems and, hence, lack generality; and in general they cannot be so easily integrated with the usual Spark installation. Future work should perhaps be aimed at making more user-friendly, like in high-level libraries, some of the tools presented here, so that less specialized scientists can make use of them without so much burden.
 
 Also, in each of the papers presented here, authors recognize the particular areas in which they can improve their contributions, and most of them are aimed at reducing some sort of overhead related to their adaptations. This is a quite important subject which, even though is very general, it is paramount that if a potential improvement is implemented, the overhead induced by this shall not reduce the benefit that could be obtained by the implementation. For instance, in \cite{Anderson2017} it is mentioned that their implementation has an overhead of several seconds, so it should be used only when the potential benefit is larger than those seconds that are introduced as overhead.
 
